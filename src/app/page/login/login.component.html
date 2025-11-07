@@ -1,0 +1,39 @@
+<div class="login-container">
+  <img src="assets/logo-rueda.png" alt="La Rueda" class="logo">
+
+  <div class="login-card">
+    <h2>Iniciar Sesión</h2>
+    <p class="subtitle">Accede a tu panel de gestión de contactos</p>
+
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+      <label>Correo Electrónico</label>
+      <input
+        type="email"
+        name="email"
+        [(ngModel)]="email"
+        required
+        placeholder="tu@email.com"
+      />
+
+      <label>Contraseña</label>
+      <input
+        type="password"
+        name="password"
+        [(ngModel)]="password"
+        required
+        placeholder="********"
+      />
+
+      <button type="submit" [disabled]="loading">
+        {{ loading ? 'Ingresando...' : 'Ingresar' }}
+      </button>
+
+      <p class="error" *ngIf="message">{{ message }}</p>
+    </form>
+
+    <footer>
+      <p>Sistema de gestión de contactos</p>
+      <small>La Rueda - Centro de Servicio Automotriz</small>
+    </footer>
+  </div>
+</div>

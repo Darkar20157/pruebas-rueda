@@ -1,0 +1,44 @@
+<div class="container">
+  <h2 class="title">Gestión de Contactos</h2>
+
+  <div class="tabs">
+    <button [class.active]="activeTab === 'list'" (click)="setTab('list')">📋 Ver Contactos</button>
+    <button [class.active]="activeTab === 'add'" (click)="setTab('add')">➕ Añadir Contacto</button>
+    <button [class.active]="activeTab === 'bulk'" (click)="setTab('bulk')">📦 Importación Masiva</button>
+  </div>
+
+  <!-- TAB 1: LISTA -->
+  <div *ngIf="activeTab === 'list'" class="tab-content">
+    <div *ngIf="contacts.length === 0">No hay contactos registrados.</div>
+    <div *ngFor="let c of contacts" class="card">
+      <h3>Nombre: {{ c.nombre }}</h3>
+      <p><strong>📱</strong> {{ c.celular }}</p>
+      <p *ngIf="c.placa"><strong>🚗</strong> {{ c.placa }}</p>
+    </div>
+  </div>
+
+  <!-- TAB 2: AGREGAR -->
+  <div *ngIf="activeTab === 'add'" class="tab-content">
+    <form [formGroup]="contactForm" (ngSubmit)="addContact()">
+      <input type="text" placeholder="Nombre completo *" formControlName="nombre" />
+      <input type="text" placeholder="Celular *" formControlName="celular" />
+      <input type="text" placeholder="Placa" formControlName="placa" />
+      <button type="submit" [disabled]="contactForm.invalid">Guardar</button>
+    </form>
+  </div>
+
+  <!-- TAB 3: IMPORTACIÓN MASIVA -->
+  <div *ngIf="activeTab === 'bulk'" class="tab-content">
+    <div *ngFor="let row of bulkContacts; let i = index" class="bulk-row">
+      <input type="text" [(ngModel)]="row.nombre" placeholder="Nombre" />
+      <input type="text" [(ngModel)]="row.celular" placeholder="Celular" />
+      <input type="text" [(ngModel)]="row.placa" placeholder="Placa" />
+      <button type="button" (click)="removeBulkRow(i)">❌</button>
+    </div>
+
+    <div class="bulk-actions">
+      <button (click)="addBulkRow()">➕ Añadir Fila</button>
+      <button (click)="sendBulk()" [disabled]="bulkContacts.length === 0">📤 Enviar Lista</button>
+    </div>
+  </div>
+</div>
