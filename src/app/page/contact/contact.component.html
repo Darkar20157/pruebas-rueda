@@ -20,9 +20,9 @@
   <!-- TAB 2: AGREGAR -->
   <div *ngIf="activeTab === 'add'" class="tab-content">
     <form [formGroup]="contactForm" (ngSubmit)="addContact()">
-      <input type="text" placeholder="Nombre completo *" formControlName="nombre" />
-      <input type="text" placeholder="Celular *" formControlName="celular" />
-      <input type="text" placeholder="Placa" formControlName="placa" />
+      <input class="campos" type="text" placeholder="Nombre completo *" formControlName="nombre" />
+      <input class="campos" type="text" placeholder="Celular *" formControlName="celular" />
+      <input class="campos" type="text" placeholder="Placa" formControlName="placa" />
       <button type="submit" [disabled]="contactForm.invalid">Guardar</button>
     </form>
   </div>
@@ -30,9 +30,9 @@
   <!-- TAB 3: IMPORTACIÓN MASIVA -->
   <div *ngIf="activeTab === 'bulk'" class="tab-content">
     <div *ngFor="let row of bulkContacts; let i = index" class="bulk-row">
-      <input type="text" [(ngModel)]="row.nombre" placeholder="Nombre" />
-      <input type="text" [(ngModel)]="row.celular" placeholder="Celular" />
-      <input type="text" [(ngModel)]="row.placa" placeholder="Placa" />
+      <input class="campos" type="text" [(ngModel)]="row.nombre" placeholder="Nombre" />
+      <input class="campos" type="text" [(ngModel)]="row.celular" placeholder="Celular" />
+      <input class="campos" type="text" [(ngModel)]="row.placa" placeholder="Placa" />
       <button type="button" (click)="removeBulkRow(i)">❌</button>
     </div>
 
